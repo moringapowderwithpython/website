@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (ARILAR LOGOLARIN YANINDA + SİNSİ BUTON) ---
+# --- 1. ANA SAYFA (ARILAR BÜYÜTÜLDÜ, UZAKLAŞTIRILDI VE RESİMLER DÜZELTİLDİ) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -35,9 +35,9 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Arıların Yeni ve Büyük Halleri (Logoların Yanında Uçacaklar) */
+            /* Arıları İyice Büyüttük ve Animasyon Ekledik */
             .ari-stil {
-                width: 85px; /* Boyutlarını büyüttük */
+                width: 110px; /* Eski hali 85px idi, iyice büyüttük */
                 height: auto;
                 animation: ucusAri 3.2s ease-in-out infinite;
             }
@@ -86,14 +86,14 @@ def ana_sayfa():
 
         <h1>moringa'nın python sitesi 🐍</h1>
         
-        <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 30px; flex-wrap: wrap;">
-            <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/5/50/TadpoleBee.png" class="ari-stil" alt="Tadpole Bee">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 70px; margin-top: 40px; flex-wrap: wrap;">
+            <img src="https://images.uncyc.org/oblogos/5/50/TadpoleBee.png" class="ari-stil" alt="Tadpole Bee">
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/b/b1/BuoyantBee.png" class="ari-stil" alt="Buoyant Bee">
+            <img src="https://images.uncyc.org/oblogos/b/b1/BuoyantBee.png" class="ari-stil" alt="Buoyant Bee">
         </div>
 
         <div class="butonlar">
@@ -118,7 +118,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GİZ Lİ ODA ---
+# --- 3. GİZLİ ODA ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
