@@ -4,16 +4,66 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA ---
+# --- 1. ANA SAYFA (DANS EDEN LOGOLAR EKLEDİK) ---
 @app.route("/")
 def ana_sayfa():
     return """
-    <body style="background-color: #121212; color: white; font-family: sans-serif; text-align: center; padding-top: 50px;">
+    <body style="background-color: #121212; color: white; font-family: sans-serif; text-align: center; padding-top: 30px; overflow-x: hidden;">
+        
+        <style>
+            @keyframes dansPython {
+                0% { transform: translateY(0px) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(5deg); }
+                100% { transform: translateY(0px) rotate(0deg); }
+            }
+            @keyframes dansLua {
+                0% { transform: translateY(0px) rotate(0deg); }
+                50% { transform: translateY(-25px) rotate(-8deg); }
+                100% { transform: translateY(0px) rotate(0deg); }
+            }
+            .logo-python {
+                width: 100px;
+                animation: dansPython 3s ease-in-out infinite;
+                margin: 20px;
+            }
+            .logo-lua {
+                width: 100px;
+                animation: dansLua 2.5s ease-in-out infinite;
+                margin: 20px;
+            }
+            .butonlar {
+                margin-top: 30px;
+            }
+            button {
+                padding: 15px; 
+                margin: 10px; 
+                cursor: pointer; 
+                font-weight: bold; 
+                border-radius: 8px; 
+                border: none; 
+                background-color: #1e293b; 
+                color: white; 
+                transition: 0.2s;
+            }
+            button:hover {
+                background-color: #334155;
+                transform: scale(1.05);
+            }
+        </style>
+
         <h1>Yazılımcı Dünyasına Hoş Geldin! ⚡</h1>
-        <br>
-        <a href="/flappy"><button style="padding: 15px; margin: 10px;">Flappy Bird Oyna 🐦</button></a>
-        <a href="/oyun"><button style="padding: 15px; margin: 10px;">Sayı Tahmin Oyunu 🎮</button></a>
-        <a href="/gizli-oda"><button style="padding: 15px; margin: 10px;">Gizli Odaya Gir 🚪</button></a>
+        
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;">
+            <img src="https://i.ibb.co/VWTg6m8g/python-logo.png" class="logo-python" alt="Python">
+            <img src="https://i.ibb.co/v4g0X898/lua-logo.png" class="logo-lua" alt="Lua">
+        </div>
+
+        <div class="butonlar">
+            <br>
+            <a href="/flappy"><button>Flappy Bird Oyna 🐦</button></a>
+            <a href="/oyun"><button>Sayı Tahmin Oyunu 🎮</button></a>
+            <a href="/gizli-oda"><button>Gizli Odaya Gir 🚪</button></a>
+        </div>
     </body>
     """
 
