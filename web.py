@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (ARILAR BÜYÜTÜLDÜ, UZAKLAŞTIRILDI VE RESİMLER DÜZELTİLDİ) ---
+# --- 1. ANA SAYFA (ARILAR BÜYÜTÜLDÜ, ARALARI GENİŞLETİLDİ VE RESİMLER GARANTİLENDİ) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -23,27 +23,27 @@ def ana_sayfa():
             }
             @keyframes ucusAri {
                 0% { transform: translateY(0px); }
-                50% { transform: translateY(-15px); }
+                50% { transform: translateY(-18px); }
                 100% { transform: translateY(0px); }
             }
             .logo-python {
-                width: 100px;
+                width: 105px;
                 animation: dansPython 3s ease-in-out infinite;
             }
             .logo-lua {
-                width: 100px;
+                width: 105px;
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Arıları İyice Büyüttük ve Animasyon Ekledik */
+            /* Arıları İyice Büyüttük ve Özel Uçuş Animasyonu Verdik */
             .ari-stil {
-                width: 110px; /* Eski hali 85px idi, iyice büyüttük */
+                width: 120px; 
                 height: auto;
-                animation: ucusAri 3.2s ease-in-out infinite;
+                animation: ucusAri 3.5s ease-in-out infinite;
             }
             
             .butonlar {
-                margin-top: 40px;
+                margin-top: 50px;
             }
             button {
                 padding: 15px; 
@@ -86,14 +86,14 @@ def ana_sayfa():
 
         <h1>moringa'nın python sitesi 🐍</h1>
         
-        <div style="display: flex; justify-content: center; align-items: center; gap: 70px; margin-top: 40px; flex-wrap: wrap;">
-            <img src="https://images.uncyc.org/oblogos/5/50/TadpoleBee.png" class="ari-stil" alt="Tadpole Bee">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 110px; margin-top: 50px; flex-wrap: wrap; padding: 0 20px;">
+            <img src="https://i.imgur.com/E0nS0Z2.png" class="ari-stil" alt="Tadpole Bee">
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://images.uncyc.org/oblogos/b/b1/BuoyantBee.png" class="ari-stil" alt="Buoyant Bee">
+            <img src="https://i.imgur.com/S56I4lI.png" class="ari-stil" alt="Buoyant Bee">
         </div>
 
         <div class="butonlar">
