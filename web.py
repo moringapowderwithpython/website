@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (YENİ BAŞLIK + DANS EDEN LOGOLAR + SİNSİ BUTON) ---
+# --- 1. ANA SAYFA (YENİ BAŞLIK + DANS EDEN LOGOLAR + BEE SWARM ARILARI + SİNSİ BUTON) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -20,6 +20,11 @@ def ana_sayfa():
                 0% { transform: translateY(0px) rotate(0deg); }
                 50% { transform: translateY(-25px) rotate(-8deg); }
                 100% { transform: translateY(0px) rotate(0deg); }
+            }
+            @keyframes ucusAri {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
             }
             .logo-python {
                 width: 100px;
@@ -65,11 +70,28 @@ def ana_sayfa():
                 text-decoration: none;
                 transition: 0.3s;
                 font-weight: normal;
+                z-index: 10;
             }
             .gizli-buton:hover {
                 color: #ff007f; 
                 border-color: #ff007f;
                 background-color: #26121f;
+            }
+
+            /* Bee Swarm Arılarının Stilleri */
+            .buoyant-bee {
+                position: fixed;
+                bottom: 45px;
+                right: 15px;
+                width: 65px;
+                animation: ucusAri 3s ease-in-out infinite;
+            }
+            .tadpole-bee {
+                position: fixed;
+                bottom: 20px;
+                left: 15px;
+                width: 65px;
+                animation: ucusAri 3.5s ease-in-out infinite;
             }
         </style>
 
@@ -86,7 +108,10 @@ def ana_sayfa():
             <a href="/oyun"><button>Sayı Tahmin Oyunu 🎮</button></a>
         </div>
 
+        <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/b/b1/BuoyantBee.png" class="buoyant-bee" alt="Buoyant Bee">
         <a href="/gizli-oda" class="gizli-buton">🚪 Gizli Giriş</a>
+
+        <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/5/50/TadpoleBee.png" class="tadpole-bee" alt="Tadpole Bee">
     </body>
     """
 
