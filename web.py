@@ -1,5 +1,6 @@
 from flask import Flask, request
 import random
+import os
 
 app = Flask(__name__)
 
@@ -28,7 +29,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GİZLİ ODA (Kendi resmin ve yeni logon) ---
+# --- 3. GİZLİ ODA ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
@@ -93,4 +94,5 @@ def flappy():
     """
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
