@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (DANS EDEN PYTHON VE C++ LOGOLARI) ---
+# --- 1. ANA SAYFA (DANS EDEN LOGOLAR VE KÖŞEYE GİZLENMİŞ BUTON) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -16,7 +16,7 @@ def ana_sayfa():
                 50% { transform: translateY(-20px) rotate(5deg); }
                 100% { transform: translateY(0px) rotate(0deg); }
             }
-            @keyframes dansCpp {
+            @keyframes dansLua {
                 0% { transform: translateY(0px) rotate(0deg); }
                 50% { transform: translateY(-25px) rotate(-8deg); }
                 100% { transform: translateY(0px) rotate(0deg); }
@@ -26,9 +26,9 @@ def ana_sayfa():
                 animation: dansPython 3s ease-in-out infinite;
                 margin: 20px;
             }
-            .logo-cpp {
+            .logo-lua {
                 width: 100px;
-                animation: dansCpp 2.5s ease-in-out infinite;
+                animation: dansLua 2.5s ease-in-out infinite;
                 margin: 20px;
             }
             .butonlar {
@@ -49,21 +49,44 @@ def ana_sayfa():
                 background-color: #334155;
                 transform: scale(1.05);
             }
+            
+            /* Sinsi Gizli Oda Butonu Stili (Sağ Alt Köşe) */
+            .gizli-buton {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                padding: 6px 10px;
+                font-size: 11px;
+                background-color: #1a1a1a; /* Arka plana yakın gizemli bir renk */
+                color: #555; /* Çok parlamasın diye soluk gri yazı */
+                border: 1px solid #222;
+                border-radius: 4px;
+                cursor: pointer;
+                text-decoration: none;
+                transition: 0.3s;
+                font-weight: normal;
+            }
+            .gizli-buton:hover {
+                color: #ff007f; /* Fareyle üstüne gelince fena parlar */
+                border-color: #ff007f;
+                background-color: #26121f;
+            }
         </style>
 
         <h1>Yazılımcı Dünyasına Hoş Geldin! ⚡</h1>
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" class="logo-cpp" alt="C++">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
         </div>
 
         <div class="butonlar">
             <br>
             <a href="/flappy"><button>Flappy Bird Oyna 🐦</button></a>
             <a href="/oyun"><button>Sayı Tahmin Oyunu 🎮</button></a>
-            <a href="/gizli-oda"><button>Gizli Odaya Gir 🚪</button></a>
         </div>
+
+        <a href="/gizli-oda" class="gizli-buton">🚪 Gizli Giriş</a>
     </body>
     """
 
