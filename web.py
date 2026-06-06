@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (ARILAR GARANTİLENDİ, BÜYÜTÜLDÜ VE UZAKLAŞTIRILDI) ---
+# --- 1. ANA SAYFA (ARILAR SIFIRDAN CSS İLE ÇİZİLDİ, ASLA KIRILMAZ!) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -26,6 +26,12 @@ def ana_sayfa():
                 50% { transform: translateY(-18px); }
                 100% { transform: translateY(0px); }
             }
+            @keyframes kanatÇırp {
+                0% { transform: scaleY(1); }
+                50% { transform: scaleY(0.3); }
+                100% { transform: scaleY(1); }
+            }
+            
             .logo-python {
                 width: 105px;
                 animation: dansPython 3s ease-in-out infinite;
@@ -35,33 +41,108 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Arıları İyice Büyüttük ve Harika Bir Uçuş Animasyonu Verdik */
-            .ari-stil {
-                width: 125px; 
-                height: auto;
+            /* --- SIFIRDAN CSS ARILARIN ORTAK TABANI --- */
+            .ari-konteyner {
+                display: inline-block;
+                position: relative;
+                width: 120px;
+                height: 100px;
                 animation: ucusAri 3.5s ease-in-out infinite;
             }
-            
-            .butonlar {
-                margin-top: 50px;
+            .ari-govde {
+                width: 120px;
+                height: 90px;
+                border-radius: 12px;
+                position: relative;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                overflow: hidden;
+                border: 2px solid rgba(255,255,255,0.1);
             }
-            button {
-                padding: 15px; 
-                margin: 10px; 
-                cursor: pointer; 
-                font-weight: bold; 
-                border-radius: 8px; 
-                border: none; 
-                background-color: #1e293b; 
-                color: white; 
-                transition: 0.2s;
+            .ari-goz {
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                background-color: #000;
+                border-radius: 50%;
+                top: 25px;
             }
-            button:hover {
-                background-color: #334155;
-                transform: scale(1.05);
+            .ari-goz-ici {
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                background-color: #fff;
+                border-radius: 50%;
+                top: 2px;
+                left: 2px;
             }
-            
-            /* Sağ Alt Köşedeki Sinsi Buton */
+            .ari-kanat-sol {
+                position: absolute;
+                width: 35px;
+                height: 20px;
+                background-color: rgba(255, 255, 255, 0.7);
+                border-radius: 50% 50% 0 0;
+                top: -15px;
+                left: 25px;
+                transform-origin: bottom;
+                animation: kanatÇırp 0.15s linear infinite;
+            }
+            .ari-kanat-sag {
+                position: absolute;
+                width: 35px;
+                height: 20px;
+                background-color: rgba(255, 255, 255, 0.7);
+                border-radius: 50% 50% 0 0;
+                top: -15px;
+                right: 25px;
+                transform-origin: bottom;
+                animation: kanatÇırp 0.15s linear infinite;
+            }
+
+            /* --- TADPOLE BEE ÖZELLEŞTİRME (Mavi/Yeşil Kurbağa Temalı) --- */
+            .tadpole-govde {
+                background: linear-gradient(135deg, #1e3a8a 0%, #0d1b2a 100%);
+            }
+            .tadpole-cizgi {
+                position: absolute;
+                width: 25px;
+                height: 100%;
+                background-color: #10b981; /* Kurbağa Yeşili Çizgiler */
+                left: 45px;
+                opacity: 0.8;
+            }
+            .tadpole-detay {
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                background-color: #34d399;
+                border-radius: 4px;
+                bottom: 15px;
+                right: 20px;
+            }
+
+            /* --- BUOYANT BEE ÖZELLEŞTİRME (Açık Mavi/Balon Temalı) --- */
+            .buoyant-govde {
+                background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            }
+            .buoyant-cizgi {
+                position: absolute;
+                width: 25px;
+                height: 100%;
+                background-color: #bae6fd; /* Açık Mavi Çizgiler */
+                left: 45px;
+                opacity: 0.7;
+            }
+            .buoyant-balon {
+                position: absolute;
+                width: 18px;
+                height: 18px;
+                background-color: #f43f5e; /* Pembe Balon Detayı */
+                border-radius: 50%;
+                top: 15px;
+                right: 15px;
+            }
+
+            /* Alt Kısımdaki Sinsi Buton */
             .gizli-buton {
                 position: fixed;
                 bottom: 10px;
@@ -82,18 +163,56 @@ def ana_sayfa():
                 border-color: #ff007f;
                 background-color: #26121f;
             }
+            .butonlar {
+                margin-top: 50px;
+            }
+            button {
+                padding: 15px; 
+                margin: 10px; 
+                cursor: pointer; 
+                font-weight: bold; 
+                border-radius: 8px; 
+                border: none; 
+                background-color: #1e293b; 
+                color: white; 
+                transition: 0.2s;
+            }
+            button:hover {
+                background-color: #334155;
+                transform: scale(1.05);
+            }
         </style>
 
         <h1>moringa'nın python sitesi 🐍</h1>
         
-        <div style="display: flex; justify-content: center; align-items: center; gap: 150px; margin-top: 50px; flex-wrap: wrap; padding: 0 40px;">
-            <img src="https://raw.githubusercontent.com/BSS-Tools/BSS-Tools.github.io/main/assets/images/bees/tadpole_bee.png" class="ari-stil" alt="Tadpole Bee">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 160px; margin-top: 60px; flex-wrap: wrap; padding: 0 40px;">
+            
+            <div class="ari-konteyner" title="Tadpole Bee">
+                <div class="ari-kanat-sol"></div><div class="ari-kanat-sag"></div>
+                <div class="ari-govde tadpole-govde">
+                    <div class="tadpole-cizgi"></div>
+                    <div class="ari-goz" style="left: 15px;"><div class="ari-goz-ici"></div></div>
+                    <div class="ari-goz" style="right: 15px;"><div class="ari-goz-ici"></div></div>
+                    <div class="tadpole-detay"></div>
+                </div>
+                <div style="font-size: 12px; margin-top: 8px; color: #a7f3d0; font-weight: bold;">Tadpole Bee</div>
+            </div>
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://raw.githubusercontent.com/BSS-Tools/BSS-Tools.github.io/main/assets/images/bees/buoyant_bee.png" class="ari-stil" alt="Buoyant Bee">
+            <div class="ari-konteyner" title="Buoyant Bee">
+                <div class="ari-kanat-sol"></div><div class="ari-kanat-sag"></div>
+                <div class="ari-govde buoyant-govde">
+                    <div class="buoyant-cizgi"></div>
+                    <div class="ari-goz" style="left: 15px;"><div class="ari-goz-ici"></div></div>
+                    <div class="ari-goz" style="right: 15px;"><div class="ari-goz-ici"></div></div>
+                    <div class="buoyant-balon"></div>
+                </div>
+                <div style="font-size: 12px; margin-top: 8px; color: #bae6fd; font-weight: bold;">Buoyant Bee</div>
+            </div>
+
         </div>
 
         <div class="butonlar">
