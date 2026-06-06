@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (DANS EDEN LOGOLAR EKLEDİK) ---
+# --- 1. ANA SAYFA (DANS EDEN PYTHON VE LUA LOGOLARI) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -54,8 +54,8 @@ def ana_sayfa():
         <h1>Yazılımcı Dünyasına Hoş Geldin! ⚡</h1>
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;">
-            <img src="https://i.ibb.co/VWTg6m8g/python-logo.png" class="logo-python" alt="Python">
-            <img src="https://i.ibb.co/v4g0X898/lua-logo.png" class="logo-lua" alt="Lua">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Lua-logo-nolabel.svg" class="logo-lua" alt="Lua">
         </div>
 
         <div class="butonlar">
