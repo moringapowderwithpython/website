@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (DANS EDEN LOGOLAR VE KÖŞEYE GİZLENMİŞ BUTON) ---
+# --- 1. ANA SAYFA (YENİ BAŞLIK + DANS EDEN LOGOLAR + SİNSİ BUTON) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -50,15 +50,15 @@ def ana_sayfa():
                 transform: scale(1.05);
             }
             
-            /* Sinsi Gizli Oda Butonu Stili (Sağ Alt Köşe) */
+            /* Sağ Alt Köşeye Pusmuş Sinsi Buton */
             .gizli-buton {
                 position: fixed;
                 bottom: 10px;
                 right: 10px;
                 padding: 6px 10px;
                 font-size: 11px;
-                background-color: #1a1a1a; /* Arka plana yakın gizemli bir renk */
-                color: #555; /* Çok parlamasın diye soluk gri yazı */
+                background-color: #1a1a1a; 
+                color: #555; 
                 border: 1px solid #222;
                 border-radius: 4px;
                 cursor: pointer;
@@ -67,13 +67,13 @@ def ana_sayfa():
                 font-weight: normal;
             }
             .gizli-buton:hover {
-                color: #ff007f; /* Fareyle üstüne gelince fena parlar */
+                color: #ff007f; 
                 border-color: #ff007f;
                 background-color: #26121f;
             }
         </style>
 
-        <h1>Yazılımcı Dünyasına Hoş Geldin! ⚡</h1>
+        <h1>moringa'nın python sitesi 🐍</h1>
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
