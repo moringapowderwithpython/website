@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (YENİ BAŞLIK + DANS EDEN LOGOLAR + BEE SWARM ARILARI + SİNSİ BUTON) ---
+# --- 1. ANA SAYFA (ARILAR LOGOLARIN YANINDA + SİNSİ BUTON) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -29,15 +29,21 @@ def ana_sayfa():
             .logo-python {
                 width: 100px;
                 animation: dansPython 3s ease-in-out infinite;
-                margin: 20px;
             }
             .logo-lua {
                 width: 100px;
                 animation: dansLua 2.5s ease-in-out infinite;
-                margin: 20px;
             }
+            
+            /* Arıların Yeni ve Büyük Halleri (Logoların Yanında Uçacaklar) */
+            .ari-stil {
+                width: 85px; /* Boyutlarını büyüttük */
+                height: auto;
+                animation: ucusAri 3.2s ease-in-out infinite;
+            }
+            
             .butonlar {
-                margin-top: 30px;
+                margin-top: 40px;
             }
             button {
                 padding: 15px; 
@@ -55,7 +61,7 @@ def ana_sayfa():
                 transform: scale(1.05);
             }
             
-            /* Sağ Alt Köşeye Pusmuş Sinsi Buton */
+            /* Sağ Alt Köşedeki Sinsi Buton */
             .gizli-buton {
                 position: fixed;
                 bottom: 10px;
@@ -70,36 +76,24 @@ def ana_sayfa():
                 text-decoration: none;
                 transition: 0.3s;
                 font-weight: normal;
-                z-index: 10;
             }
             .gizli-buton:hover {
                 color: #ff007f; 
                 border-color: #ff007f;
                 background-color: #26121f;
             }
-
-            /* Bee Swarm Arılarının Stilleri */
-            .buoyant-bee {
-                position: fixed;
-                bottom: 45px;
-                right: 15px;
-                width: 65px;
-                animation: ucusAri 3s ease-in-out infinite;
-            }
-            .tadpole-bee {
-                position: fixed;
-                bottom: 20px;
-                left: 15px;
-                width: 65px;
-                animation: ucusAri 3.5s ease-in-out infinite;
-            }
         </style>
 
         <h1>moringa'nın python sitesi 🐍</h1>
         
-        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 30px; flex-wrap: wrap;">
+            <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/5/50/TadpoleBee.png" class="ari-stil" alt="Tadpole Bee">
+            
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
+            
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
+            
+            <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/b/b1/BuoyantBee.png" class="ari-stil" alt="Buoyant Bee">
         </div>
 
         <div class="butonlar">
@@ -108,10 +102,7 @@ def ana_sayfa():
             <a href="/oyun"><button>Sayı Tahmin Oyunu 🎮</button></a>
         </div>
 
-        <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/b/b1/BuoyantBee.png" class="buoyant-bee" alt="Buoyant Bee">
         <a href="/gizli-oda" class="gizli-buton">🚪 Gizli Giriş</a>
-
-        <img src="https://static.wikia.nocookie.net/bee-swarm-simulator/images/5/50/TadpoleBee.png" class="tadpole-bee" alt="Tadpole Bee">
     </body>
     """
 
@@ -127,7 +118,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GİZLİ ODA ---
+# --- 3. GİZ Lİ ODA ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
