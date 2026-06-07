@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = "moringa_python_site_ozel_keyi" # Oyun hafızası için şifreleyici
 
-# --- 1. ANA SAYFA (YENİ KUSURSUZ BUOYANT BEE ENTEGRE EDİLDİ) ---
+# --- 1. ANA SAYFA (YENİ KUSURSUZ ARILAR ENTEGRE EDİLDİ) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -36,18 +36,18 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Arıların Ortak Uçuş ve Netlik Ayarları */
+            /* Tadpole Bee Yeni Görsel Ayarları */
             .ari-tadpole {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
             }
 
+            /* Buoyant Bee Yeni Görsel Ayarları */
             .ari-buoyant {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.2s ease-in-out infinite;
-                /* Eski filtreleri tamamen kaldırdık, görsel zaten mükemmel! */
             }
             
             .butonlar {
@@ -76,7 +76,7 @@ def ana_sayfa():
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 120px; margin-top: 50px; flex-wrap: wrap; padding: 0 40px;">
             
-            <img src="https://i.ibb.co/6wX7x64/tadpole-nobg.png" class="ari-tadpole" alt="Tadpole Bee">
+            <img src="https://www.image2url.com/r2/default/images/1780846534135-ed934fd6-a009-4bde-973f-fc0ebd230ec7.jpg" class="ari-tadpole" alt="Tadpole Bee">
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
@@ -131,7 +131,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GİZLİ ODA ---
+# --- 3. GIZLI ODA ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
