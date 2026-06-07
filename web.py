@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = "moringa_python_site_ozel_keyi" # Oyun hafızası için şifreleyici
 
-# --- 1. ANA SAYFA (BUOYANT'IN ARKA PLANI TAMAMEN ERİTİLDİ, RENKLERİ KORUNDU) ---
+# --- 1. ANA SAYFA (YENİ KUSURSUZ BUOYANT BEE ENTEGRE EDİLDİ) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -36,23 +36,18 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Tadpole Bee: Kırılmayan, Net Görsel */
+            /* Arıların Ortak Uçuş ve Netlik Ayarları */
             .ari-tadpole {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
             }
 
-            /* Buoyant Bee: Beyazlığı Sıfırlayan Ama Renkleri Canlı Tutan Sihirli CSS */
             .ari-buoyant {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.2s ease-in-out infinite;
-                
-                /* Kirli beyazlığı tamamen yutan, mavi ve sarıyı parlatan akıllı filtreler */
-                mix-blend-mode: screen;
-                filter: contrast(125%) brightness(90%) saturate(110%);
-                background-color: #121212;
+                /* Eski filtreleri tamamen kaldırdık, görsel zaten mükemmel! */
             }
             
             .butonlar {
@@ -87,7 +82,7 @@ def ana_sayfa():
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://www.image2url.com/r2/default/images/1780770391252-e0bd5937-54f6-4110-8d12-ba5bb9c851ae.jpg" class="ari-buoyant" alt="Buoyant Bee">
+            <img src="https://www.image2url.com/r2/default/images/1780843955524-5bf7cf96-7c1c-4cd4-bdbe-8b114691263c.jpg" class="ari-buoyant" alt="Buoyant Bee">
         </div>
 
         <div class="butonlar">
@@ -100,7 +95,7 @@ def ana_sayfa():
     </body>
     """
 
-# --- 2. SAYI TAHMİN OYUNU (HAFIZALI TAM SÜRÜM) ---
+# --- 2. SAYI TAHMİN OYUNU ---
 @app.route("/oyun", methods=["GET", "POST"])
 def oyun():
     if 'gizli_sayi' not in session:
@@ -153,7 +148,7 @@ def gizli_oda():
     </body>
     """
 
-# --- 4. FLAPPY BIRD (AKICI JAVASCRIPT KODU) ---
+# --- 4. FLAPPY BIRD ---
 @app.route("/flappy")
 def flappy():
     return """
