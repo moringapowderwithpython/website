@@ -1,10 +1,11 @@
-from flask import Flask, request
+from flask import Flask, request, session
 import random
 import os
 
 app = Flask(__name__)
+app.secret_key = "moringa_gizli_anahtar_123"  # Sayı tahmin oyunu hafızası için gerekli
 
-# --- 1. ANA SAYFA (BUOYANT BEE RENKLERİ GERİ GELDİ VE ARKA PLANI ERİTİLDİ) ---
+# --- 1. ANA SAYFA (ARILAR VE LOGOLAR TERTEMİZ DÜZENDE) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -35,23 +36,33 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Tadpole Bee Sabit ve Canlı Tasarım */
-            .ari-tadpole {
+            /* Arıların Kusursuz, Şeffaf ve Dans Eden Tasarımı */
+            .ari-stil {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
+                filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
             }
-
-            /* Buoyant Bee: Renkleri tam koruyan, sadece beyaz arka planı silen sihirli CSS */
-            .ari-buoyant {
-                width: 135px; 
-                height: auto;
-                animation: ucusAri 3.2s ease-in-out infinite;
-                
-                /* Gelişmiş CSS Kromatik Maskeleme (Beyazı şeffaf yapar, renkleri bozmaz) */
-                background-color: #121212;
-                display: inline-block;
-                border-radius: 8px;
+            
+            .butonlar {
+                margin-top: 50px;
+            }
+            button {
+                padding: 15px 25px; 
+                margin: 10px; 
+                cursor: pointer; 
+                font-weight: bold; 
+                border-radius: 8px; 
+                border: none; 
+                background-color: #1e293b; 
+                color: white; 
+                font-size: 16px;
+                transition: 0.2s;
+            }
+            button:hover {
+                background-color: #38bdf8;
+                color: black;
+                transform: scale(1.05);
             }
         </style>
 
@@ -59,21 +70,16 @@ def ana_sayfa():
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 120px; margin-top: 50px; flex-wrap: wrap; padding: 0 40px;">
             
-            <img src="https://vignette.wikia.nocookie.net/bee-swarm-simulator/images/b/b3/Tadpole_Bee.png/revision/latest?cb=20200325015330" class="ari-tadpole" alt="Tadpole Bee">
+            <img src="https://i.ibb.co/6wX7x64/tadpole-nobg.png" class="ari-stil" alt="Tadpole Bee">
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://www.image2url.com/r2/default/images/1780770391252-e0bd5937-54f6-4110-8d12-ba5bb9c851ae.jpg" class="ari-buoyant" alt="Buoyant Bee">
+            <img src="https://i.ibb.co/vYmZ7nF/buoyant-nobg.png" class="ari-stil" alt="Buoyant Bee">
         </div>
 
         <div class="butonlar">
-            <style>
-                .butonlar { margin-top: 50px; }
-                button { padding: 15px; margin: 10px; cursor: pointer; font-weight: bold; border-radius: 8px; border: none; background-color: #1e293b; color: white; transition: 0.2s; }
-                button:hover { background-color: #334155; transform: scale(1.05); }
-            </style>
             <br>
             <a href="/flappy"><button>Flappy Bird Oyna 🐦</button></a>
             <a href="/oyun"><button>Sayı Tahmin Oyunu 🎮</button></a>
@@ -83,16 +89,24 @@ def ana_sayfa():
     </body>
     """
 
-# --- 2. SAYI TAHMİN OYUNU ---
+# --- 2. SAYI TAHMİN OYUNU (HAFIZALI TAM SÜRÜM) ---
 @app.route("/oyun", methods=["GET", "POST"])
 def oyun():
+    if 'gizli_sayi' not in session:
+        session['gizli_sayi'] = random.randint(1, 50)
+        session['tahmin_sayisi'] = 0
+
     mesaj = "1 ile 50 arasında bir sayı tahmin et!"
+    
     if request.method == "POST":
         try:
             tahmin = int(request.form.get("tahmin", 0))
-            if tahmin == 25:
-                mesaj = "🎉 TEBRİKLER! Doğru tahmin ettin!"
-            elif tahmin < 25:
+            session['tahmin_sayisi'] += 1
+            
+            if tahmin == session['gizli_sayi']:
+                mesaj = f"🎉 TEBRİKLER! {session['tahmin_sayisi']}. denemede doğru tahmin ettin! Sayı {session['gizli_sayi']} idi."
+                session.pop('gizli_sayi', None)  # Oyunu sıfırla
+            elif tahmin < session['gizli_sayi']:
                 mesaj = "📈 Daha BÜYÜK bir sayı dene!"
             else:
                 mesaj = "📉 Daha KÜÇÜK bir sayı dene!"
@@ -113,7 +127,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GİZLİ ODA ---
+# --- 3. GİZLİ ODA (SOSYAL MEDYA BUTONLU) ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
@@ -123,14 +137,14 @@ def gizli_oda():
         <img src="https://i.ibb.co/Zp6xv1Bs/image.png" style="width: 200px; border-radius: 50%; border: 5px solid white;">
         <br><br><br>
         <a href="https://www.tiktok.com/@rz4uy" target="_blank">
-            <img src="https://resimlink.com/F7NBK0UuOfI" style="width: 120px; height: 120px; cursor: pointer; border-radius: 20px;">
+            <img src="https://resimlink.com/F7NBK0UuOfI" style="width: 120px; height: 120px; cursor: pointer; border-radius: 20px; transition: 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
         </a>
         <br><br><br>
         <a href="/" style="color: #c7d2fe; text-decoration: none;">← Ana Sayfaya Dön</a>
     </body>
     """
 
-# --- 4. FLAPPY BIRD (TAM SÜRÜM JAVASCRIPT KODU) ---
+# --- 4. FLAPPY BIRD (AKICI JAVASCRIPT KODU) ---
 @app.route("/flappy")
 def flappy():
     return """
@@ -164,11 +178,11 @@ def flappy():
                 ctx.fillRect(p.x, 0, 50, p.top);
                 ctx.fillRect(p.x, p.top + 130, 50, 480);
                 if (50 < p.x + 50 && 50 + 30 > p.x && (y < p.top || y + 25 > p.top + 130)) {
-                    gameRunning = false; alert('Skorun: ' + score); location.reload();
+                    gameRunning = false; alert('Oyun Bitti! Skorun: ' + score); location.reload();
                 }
                 if (p.x === 50) score++;
             }
-            if (y > 480 || y < 0) { gameRunning = false; alert('Skorun: ' + score); location.reload(); }
+            if (y > 480 || y < 0) { gameRunning = false; alert('Oyun Bitti! Skorun: ' + score); location.reload(); }
             if (pipes[pipes.length - 1].x < 160) pipes.push({ x: 320, top: Math.floor(Math.random() * 200) + 60 });
             ctx.fillStyle = "white"; ctx.font = "bold 24px sans-serif"; ctx.fillText("Skor: " + score, 15, 35);
             requestAnimationFrame(draw);
