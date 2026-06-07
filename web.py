@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = "moringa_python_site_ozel_keyi" # Oyun hafızası için şifreleyici
 
-# --- 1. ANA SAYFA (BUOYANT BEE RENKLERİ KORUNARAK ARKA PLANA BÜRÜNDÜ) ---
+# --- 1. ANA SAYFA (BUOYANT'IN ARKA PLANI TAMAMEN ERİTİLDİ, RENKLERİ KORUNDU) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -36,24 +36,23 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Tadpole Bee Sabit ve Sorunsuz Sürüm */
+            /* Tadpole Bee: Kırılmayan, Net Görsel */
             .ari-tadpole {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
             }
 
-            /* Buoyant Bee: Beyaz Arka Planı Sitenin Rengine Bürüyen Ama Renkleri Bozmayan Sihirli CSS */
+            /* Buoyant Bee: Beyazlığı Sıfırlayan Ama Renkleri Canlı Tutan Sihirli CSS */
             .ari-buoyant {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.2s ease-in-out infinite;
                 
-                /* Beyaz kareyi eritme ve rengi sitenin #121212 siyahlığına büründürme formülü */
-                mix-blend-mode: lighten;
-                filter: contrast(110%) brightness(95%);
+                /* Kirli beyazlığı tamamen yutan, mavi ve sarıyı parlatan akıllı filtreler */
+                mix-blend-mode: screen;
+                filter: contrast(125%) brightness(90%) saturate(110%);
                 background-color: #121212;
-                border-radius: 10px;
             }
             
             .butonlar {
@@ -101,7 +100,7 @@ def ana_sayfa():
     </body>
     """
 
-# --- 2. SAYI TAHMİN OYUNU (TAM SÜRÜM) ---
+# --- 2. SAYI TAHMİN OYUNU (HAFIZALI TAM SÜRÜM) ---
 @app.route("/oyun", methods=["GET", "POST"])
 def oyun():
     if 'gizli_sayi' not in session:
@@ -154,7 +153,7 @@ def gizli_oda():
     </body>
     """
 
-# --- 4. FLAPPY BIRD (TAM SÜRÜM AKICI JAVASCRIPT) ---
+# --- 4. FLAPPY BIRD (AKICI JAVASCRIPT KODU) ---
 @app.route("/flappy")
 def flappy():
     return """
