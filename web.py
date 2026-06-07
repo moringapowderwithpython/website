@@ -5,12 +5,12 @@ import os
 app = Flask(__name__)
 app.secret_key = "moringa_python_site_ozel_keyi" # Oyun hafızası için şifreleyici
 
-# --- 1. ANA SAYFA (EFSANE ARKA PLAN GÖRSELİ ENTEGRE EDİLDİ) ---
+# --- 1. ANA SAYFA (ARILARIN SİYAH KUTULARI ERİTİLDİ) ---
 @app.route("/")
 def ana_sayfa():
     return """
     <body style="
-        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://www.image2url.com/r2/default/images/1780847286056-2c37b288-aa4c-4835-a0e0-655452756c6c.jpg');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://www.image2url.com/r2/default/images/1780847286056-2c37b288-aa4c-4835-a0e0-655452756c6c.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -47,18 +47,20 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Tadpole Bee Görsel Ayarları */
+            /* Tadpole Bee: Arkasındaki siyah kutu eritildi */
             .ari-tadpole {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
+                mix-blend-mode: screen; /* Siyah arka planı tamamen şeffaf yapar */
             }
 
-            /* Buoyant Bee Görsel Ayarları */
+            /* Buoyant Bee: Arkasındaki siyah kutu eritildi */
             .ari-buoyant {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.2s ease-in-out infinite;
+                mix-blend-mode: screen; /* Siyah arka planı tamamen şeffaf yapar */
             }
             
             .butonlar {
@@ -71,7 +73,7 @@ def ana_sayfa():
                 font-weight: bold; 
                 border-radius: 8px; 
                 border: none; 
-                background-color: rgba(30, 41, 59, 0.85); /* Arka plan göründüğü için butonları hafif şeffaf yaptık, çok şık durdu! */
+                background-color: rgba(30, 41, 59, 0.85); 
                 color: white; 
                 font-size: 16px;
                 transition: 0.2s;
@@ -88,13 +90,13 @@ def ana_sayfa():
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 120px; margin-top: 50px; flex-wrap: wrap; padding: 0 40px;">
             
-            <img src="https://www.image2url.com/r2/default/images/1780846534135-ed934fd6-a009-4bde-973f-fc0ebd230ec7.jpg" class="ari-tadpole" alt="Tadpole Bee" style="border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.5);">
+            <img src="https://www.image2url.com/r2/default/images/1780846534135-ed934fd6-a009-4bde-973f-fc0ebd230ec7.jpg" class="ari-tadpole" alt="Tadpole Bee">
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://www.image2url.com/r2/default/images/1780843955524-5bf7cf96-7c1c-4cd4-bdbe-8b114691263c.jpg" class="ari-buoyant" alt="Buoyant Bee" style="border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.5);">
+            <img src="https://www.image2url.com/r2/default/images/1780843955524-5bf7cf96-7c1c-4cd4-bdbe-8b114691263c.jpg" class="ari-buoyant" alt="Buoyant Bee">
         </div>
 
         <div class="butonlar">
@@ -110,7 +112,7 @@ def ana_sayfa():
 # --- 2. SAYI TAHMİN OYUNU ---
 @app.route("/oyun", methods=["GET", "POST"])
 def oyun():
-    if 'gizy_sayi' not in session: # Minik değişken ismi güvenliği
+    if 'gizli_sayi' not in session:
         session['gizli_sayi'] = random.randint(1, 50)
         session['tahmin_sayisi'] = 0
 
