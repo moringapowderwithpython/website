@@ -3,9 +3,9 @@ import random
 import os
 
 app = Flask(__name__)
-app.secret_key = "moringa_gizli_anahtar_123"  # Sayı tahmin oyunu hafızası için gerekli
+app.secret_key = "moringa_python_site_ozel_keyi" # Oyun hafızası için şifreleyici
 
-# --- 1. ANA SAYFA (ARILAR VE LOGOLAR TERTEMİZ DÜZENDE) ---
+# --- 1. ANA SAYFA (BUOYANT BEE RENKLERİ KORUNARAK ARKA PLANA BÜRÜNDÜ) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -36,12 +36,24 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Arıların Kusursuz, Şeffaf ve Dans Eden Tasarımı */
-            .ari-stil {
+            /* Tadpole Bee Sabit ve Sorunsuz Sürüm */
+            .ari-tadpole {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
-                filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            }
+
+            /* Buoyant Bee: Beyaz Arka Planı Sitenin Rengine Bürüyen Ama Renkleri Bozmayan Sihirli CSS */
+            .ari-buoyant {
+                width: 135px; 
+                height: auto;
+                animation: ucusAri 3.2s ease-in-out infinite;
+                
+                /* Beyaz kareyi eritme ve rengi sitenin #121212 siyahlığına büründürme formülü */
+                mix-blend-mode: lighten;
+                filter: contrast(110%) brightness(95%);
+                background-color: #121212;
+                border-radius: 10px;
             }
             
             .butonlar {
@@ -70,13 +82,13 @@ def ana_sayfa():
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 120px; margin-top: 50px; flex-wrap: wrap; padding: 0 40px;">
             
-            <img src="https://i.ibb.co/6wX7x64/tadpole-nobg.png" class="ari-stil" alt="Tadpole Bee">
+            <img src="https://i.ibb.co/6wX7x64/tadpole-nobg.png" class="ari-tadpole" alt="Tadpole Bee">
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://i.ibb.co/vYmZ7nF/buoyant-nobg.png" class="ari-stil" alt="Buoyant Bee">
+            <img src="https://www.image2url.com/r2/default/images/1780770391252-e0bd5937-54f6-4110-8d12-ba5bb9c851ae.jpg" class="ari-buoyant" alt="Buoyant Bee">
         </div>
 
         <div class="butonlar">
@@ -89,7 +101,7 @@ def ana_sayfa():
     </body>
     """
 
-# --- 2. SAYI TAHMİN OYUNU (HAFIZALI TAM SÜRÜM) ---
+# --- 2. SAYI TAHMİN OYUNU (TAM SÜRÜM) ---
 @app.route("/oyun", methods=["GET", "POST"])
 def oyun():
     if 'gizli_sayi' not in session:
@@ -97,15 +109,13 @@ def oyun():
         session['tahmin_sayisi'] = 0
 
     mesaj = "1 ile 50 arasında bir sayı tahmin et!"
-    
     if request.method == "POST":
         try:
             tahmin = int(request.form.get("tahmin", 0))
             session['tahmin_sayisi'] += 1
-            
             if tahmin == session['gizli_sayi']:
-                mesaj = f"🎉 TEBRİKLER! {session['tahmin_sayisi']}. denemede doğru tahmin ettin! Sayı {session['gizli_sayi']} idi."
-                session.pop('gizli_sayi', None)  # Oyunu sıfırla
+                mesaj = f"🎉 TEBRİKLER! {session['tahmin_sayisi']}. denemede bildin! Sayı: {session['gizli_sayi']}"
+                session.pop('gizli_sayi', None)
             elif tahmin < session['gizli_sayi']:
                 mesaj = "📈 Daha BÜYÜK bir sayı dene!"
             else:
@@ -127,7 +137,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GİZLİ ODA (SOSYAL MEDYA BUTONLU) ---
+# --- 3. GİZLİ ODA ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
@@ -137,14 +147,14 @@ def gizli_oda():
         <img src="https://i.ibb.co/Zp6xv1Bs/image.png" style="width: 200px; border-radius: 50%; border: 5px solid white;">
         <br><br><br>
         <a href="https://www.tiktok.com/@rz4uy" target="_blank">
-            <img src="https://resimlink.com/F7NBK0UuOfI" style="width: 120px; height: 120px; cursor: pointer; border-radius: 20px; transition: 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="https://resimlink.com/F7NBK0UuOfI" style="width: 120px; height: 120px; cursor: pointer; border-radius: 20px;">
         </a>
         <br><br><br>
         <a href="/" style="color: #c7d2fe; text-decoration: none;">← Ana Sayfaya Dön</a>
     </body>
     """
 
-# --- 4. FLAPPY BIRD (AKICI JAVASCRIPT KODU) ---
+# --- 4. FLAPPY BIRD (TAM SÜRÜM AKICI JAVASCRIPT) ---
 @app.route("/flappy")
 def flappy():
     return """
