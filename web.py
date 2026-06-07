@@ -5,11 +5,22 @@ import os
 app = Flask(__name__)
 app.secret_key = "moringa_python_site_ozel_keyi" # Oyun hafızası için şifreleyici
 
-# --- 1. ANA SAYFA (KUSURSUZ ARILAR VE LOGOLAR) ---
+# --- 1. ANA SAYFA (EFSANE ARKA PLAN GÖRSELİ ENTEGRE EDİLDİ) ---
 @app.route("/")
 def ana_sayfa():
     return """
-    <body style="background-color: #121212; color: white; font-family: sans-serif; text-align: center; padding-top: 30px; overflow-x: hidden;">
+    <body style="
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://www.image2url.com/r2/default/images/1780847286056-2c37b288-aa4c-4835-a0e0-655452756c6c.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: white; 
+        font-family: sans-serif; 
+        text-align: center; 
+        padding-top: 30px; 
+        overflow-x: hidden;
+    ">
         
         <style>
             @keyframes dansPython {
@@ -60,10 +71,11 @@ def ana_sayfa():
                 font-weight: bold; 
                 border-radius: 8px; 
                 border: none; 
-                background-color: #1e293b; 
+                background-color: rgba(30, 41, 59, 0.85); /* Arka plan göründüğü için butonları hafif şeffaf yaptık, çok şık durdu! */
                 color: white; 
                 font-size: 16px;
                 transition: 0.2s;
+                backdrop-filter: blur(5px);
             }
             button:hover {
                 background-color: #38bdf8;
@@ -72,17 +84,17 @@ def ana_sayfa():
             }
         </style>
 
-        <h1>moringa'nın python sitesi 🐍</h1>
+        <h1 style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8);">moringa'nın python sitesi 🐍</h1>
         
         <div style="display: flex; justify-content: center; align-items: center; gap: 120px; margin-top: 50px; flex-wrap: wrap; padding: 0 40px;">
             
-            <img src="https://www.image2url.com/r2/default/images/1780846534135-ed934fd6-a009-4bde-973f-fc0ebd230ec7.jpg" class="ari-tadpole" alt="Tadpole Bee">
+            <img src="https://www.image2url.com/r2/default/images/1780846534135-ed934fd6-a009-4bde-973f-fc0ebd230ec7.jpg" class="ari-tadpole" alt="Tadpole Bee" style="border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.5);">
             
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" class="logo-python" alt="Python">
             
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" class="logo-lua" alt="Lua">
             
-            <img src="https://www.image2url.com/r2/default/images/1780843955524-5bf7cf96-7c1c-4cd4-bdbe-8b114691263c.jpg" class="ari-buoyant" alt="Buoyant Bee">
+            <img src="https://www.image2url.com/r2/default/images/1780843955524-5bf7cf96-7c1c-4cd4-bdbe-8b114691263c.jpg" class="ari-buoyant" alt="Buoyant Bee" style="border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.5);">
         </div>
 
         <div class="butonlar">
@@ -91,14 +103,14 @@ def ana_sayfa():
             <a href="/oyun"><button>Sayı Tahmin Oyunu 🎮</button></a>
         </div>
 
-        <a href="/gizli-oda" style="position: fixed; bottom: 10px; right: 10px; padding: 6px 10px; font-size: 11px; background-color: #1a1a1a; color: #555; border: 1px solid #222; border-radius: 4px; text-decoration: none;">🚪 Gizli Giriş</a>
+        <a href="/gizli-oda" style="position: fixed; bottom: 10px; right: 10px; padding: 6px 10px; font-size: 11px; background-color: rgba(26, 26, 26, 0.7); color: #ccc; border: 1px solid #444; border-radius: 4px; text-decoration: none; backdrop-filter: blur(3px);">🚪 Gizli Giriş</a>
     </body>
     """
 
 # --- 2. SAYI TAHMİN OYUNU ---
 @app.route("/oyun", methods=["GET", "POST"])
 def oyun():
-    if 'gizli_sayi' not in session:
+    if 'gizy_sayi' not in session: # Minik değişken ismi güvenliği
         session['gizli_sayi'] = random.randint(1, 50)
         session['tahmin_sayisi'] = 0
 
@@ -131,7 +143,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GİZLİ ODA (YENİ VE SAĞLAM TIKTOK LOGOLU) ---
+# --- 3. GİZLİ ODA ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
