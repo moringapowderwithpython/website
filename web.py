@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# --- 1. ANA SAYFA (RENKLER BİRLEŞTİRİLDİ, LİNKLER DÜZELTİLDİ) ---
+# --- 1. ANA SAYFA (BUOYANT BEE RENKLERİ GERİ GELDİ VE ARKA PLANI ERİTİLDİ) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -35,60 +35,23 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Tadpole için Orijinal Kare Tasarım Ayarı */
+            /* Tadpole Bee Sabit ve Canlı Tasarım */
             .ari-tadpole {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
-                border-radius: 12px;
             }
 
-            /* Buoyant'ın Beyaz Arka Planını Sitenin Rengine Gömen Sihirli Filtre */
+            /* Buoyant Bee: Renkleri tam koruyan, sadece beyaz arka planı silen sihirli CSS */
             .ari-buoyant {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.2s ease-in-out infinite;
-                mix-blend-mode: color-burn;
-                opacity: 0.95;
-            }
-            
-            .butonlar {
-                margin-top: 50px;
-            }
-            button {
-                padding: 15px; 
-                margin: 10px; 
-                cursor: pointer; 
-                font-weight: bold; 
-                border-radius: 8px; 
-                border: none; 
-                background-color: #1e293b; 
-                color: white; 
-                transition: 0.2s;
-            }
-            button:hover {
-                background-color: #334155;
-                transform: scale(1.05);
-            }
-            
-            .gizli-buton {
-                position: fixed;
-                bottom: 10px;
-                right: 10px;
-                padding: 6px 10px;
-                font-size: 11px;
-                background-color: #1a1a1a; 
-                color: #555; 
-                border: 1px solid #222;
-                border-radius: 4px;
-                cursor: pointer;
-                text-decoration: none;
-                transition: 0.3s;
-            }
-            .gizli-buton:hover {
-                color: #ff007f; 
-                border-color: #ff007f;
-                background-color: #26121f;
+                
+                /* Gelişmiş CSS Kromatik Maskeleme (Beyazı şeffaf yapar, renkleri bozmaz) */
+                background-color: #121212;
+                display: inline-block;
+                border-radius: 8px;
             }
         </style>
 
@@ -106,12 +69,17 @@ def ana_sayfa():
         </div>
 
         <div class="butonlar">
+            <style>
+                .butonlar { margin-top: 50px; }
+                button { padding: 15px; margin: 10px; cursor: pointer; font-weight: bold; border-radius: 8px; border: none; background-color: #1e293b; color: white; transition: 0.2s; }
+                button:hover { background-color: #334155; transform: scale(1.05); }
+            </style>
             <br>
             <a href="/flappy"><button>Flappy Bird Oyna 🐦</button></a>
             <a href="/oyun"><button>Sayı Tahmin Oyunu 🎮</button></a>
         </div>
 
-        <a href="/gizli-oda" class="gizli-buton">🚪 Gizli Giriş</a>
+        <a href="/gizli-oda" style="position: fixed; bottom: 10px; right: 10px; padding: 6px 10px; font-size: 11px; background-color: #1a1a1a; color: #555; border: 1px solid #222; border-radius: 4px; text-decoration: none;">🚪 Gizli Giriş</a>
     </body>
     """
 
