@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = "moringa_python_site_ozel_keyi" # Oyun hafızası için şifreleyici
 
-# --- 1. ANA SAYFA (YENİ KUSURSUZ ARILAR ENTEGRE EDİLDİ) ---
+# --- 1. ANA SAYFA (KUSURSUZ ARILAR VE LOGOLAR) ---
 @app.route("/")
 def ana_sayfa():
     return """
@@ -36,14 +36,14 @@ def ana_sayfa():
                 animation: dansLua 2.5s ease-in-out infinite;
             }
             
-            /* Tadpole Bee Yeni Görsel Ayarları */
+            /* Tadpole Bee Görsel Ayarları */
             .ari-tadpole {
                 width: 135px; 
                 height: auto;
                 animation: ucusAri 3.5s ease-in-out infinite;
             }
 
-            /* Buoyant Bee Yeni Görsel Ayarları */
+            /* Buoyant Bee Görsel Ayarları */
             .ari-buoyant {
                 width: 135px; 
                 height: auto;
@@ -131,7 +131,7 @@ def oyun():
     </body>
     """
 
-# --- 3. GIZLI ODA ---
+# --- 3. GİZLİ ODA (YENİ VE SAĞLAM TIKTOK LOGOLU) ---
 @app.route("/gizli-oda")
 def gizli_oda():
     return """
@@ -140,9 +140,11 @@ def gizli_oda():
         <br>
         <img src="https://i.ibb.co/Zp6xv1Bs/image.png" style="width: 200px; border-radius: 50%; border: 5px solid white;">
         <br><br><br>
+        
         <a href="https://www.tiktok.com/@rz4uy" target="_blank">
-            <img src="https://resimlink.com/F7NBK0UuOfI" style="width: 120px; height: 120px; cursor: pointer; border-radius: 20px;">
+            <img src="https://www.image2url.com/r2/default/images/1780846803888-dcb8074e-a946-4b21-8a9a-92b9eeabca78.jpg" style="width: 120px; height: auto; cursor: pointer; border-radius: 20px; transition: 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
         </a>
+        
         <br><br><br>
         <a href="/" style="color: #c7d2fe; text-decoration: none;">← Ana Sayfaya Dön</a>
     </body>
